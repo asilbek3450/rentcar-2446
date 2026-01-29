@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}RentCar - Avtomobillar{% endblock %}
+
+{% block content %}
+<section class="hero-wrap hero-wrap-2" style="background-image: url('{% static 'images/bg_1.jpg' %}');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-start">
+            <div class="col-md-9 pb-5">
+                <p class="breadcrumbs">
+                    <span class="mr-2">
+                        <a href="{% url 'home' %}">
+                            <i class="fas fa-home"></i> Bosh sahifa <i class="ion-ios-arrow-forward"></i>
+                        </a>
+                    </span>
+                    <span>Avtomobillar</span>
+                </p>
+                <h1 class="mb-3 bread text-white">Avtomobillarni tanlang</h1>
+                <p class="text-light">Keng assortimentdagi yangi va ishlatilgan avtomobillar</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-filter mr-2"></i>Avtomobil qidirish</h5>
+                        <form method="get" action="{% url 'car_list' %}" class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Brend</label>
+                                <select class="form-control" name="brand">
+                                    <option value="">Barcha brendlar</option>
+                                    {% for brand in brands %}
+                                    <option value="{{ brand.id }}" {% if selected_brand == brand.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ brand.name }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-2">
+                                <label class="form-label">Qidirish</label>
+                                <input type="text" class="form-control" name="search" value="{{ search }}" placeholder="Model nomi">
+                            </div>
+                            
+                            <div class="col-md-2">
+                                <label class="form-label">Min narx ($)</label>
+                                <input type="number" class="form-control" name="min_price" value="{{ min_price }}" placeholder="0" min="0">
+                            </div>
+                            
+                            <div class="col-md-2">
+                                <label class="form-label">Max narx ($)</label>
+                                <input type="number" class="form-control" name="max_price" value="{{ max_price }}" placeholder="1000" min="0">
+                            </div>
+                            
+                            <div class="col-md-2">
+                                <label class="form-label">Yoqilg'i</label>
+                                <select class="form-control" name="fuel_type">
+                                    <option value="">Barchasi</option>
+                                    <option value="benzin" {% if fuel_type == 'benzin' %}selected{% endif %}>Benzin</option>
+                                    <option value="dizel" {% if fuel_type == 'dizel' %}selected{% endif %}>Dizel</option>
+                                    <option value="elektro" {% if fuel_type == 'elektro' %}selected{% endif %}>Elektro</option>
+                                    <option value="gibrid" {% if fuel_type == 'gibrid' %}selected{% endif %}>Gibrid</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-1 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Avtomobillar ro'yxati -->
+        <div class="row">
+            {% for car in cars %}
+            <div class="col-md-4 mb-4">
+                <div class="car-wrap rounded">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url('{{ car.image.url }}'); height: 220px; background-size: cover; background-position: center;">
+                        {% if car.is_featured %}
+                        <span class="badge bg-success position-absolute" style="top: 10px; right: 10px;">Tavsiya</span>
+                        {% endif %}
+                    </div>
+                    <div class="text p-3">
+                        <h2 class="mb-0">
+                            <a href="{% url 'car_detail' car.id %}">{{ car.brand.name }} {{ car.name }}</a>
+                        </h2>
+                        <div class="d-flex mb-3">
+                            <span class="cat">{{ car.brand.name }}</span>
+                            <p class="price ml-auto">{{ car.price_per_day }} $ <span>/kun</span></p>
+                        </div>
+                        <div class="car-info mb-3">
+                            <p class="mb-1">
+                                <i class="fas fa-calendar mr-2"></i> {{ car.year }} yil
+                                <span class="ml-3"><i class="fas fa-tachometer-alt mr-2"></i> {{ car.mileage|floatformat:0 }} km</span>
+                            </p>
+                            <p class="mb-1">
+                                <i class="fas fa-gas-pump mr-2"></i> {{ car.get_fuel_type_display }}
+                                <span class="ml-3"><i class="fas fa-cogs mr-2"></i> {{ car.get_transmission_display }}</span>
+                            </p>
+                        </div>
+                        <p class="d-flex mb-0 d-block">
+                            <a href="{% url 'car_detail' car.id %}" class="btn btn-primary py-2 mr-1 w-100">
+                                <i class="fas fa-info-circle mr-1"></i> Batafsil
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-car fa-5x text-muted mb-3"></i>
+                <h3>Avtomobillar topilmadi</h3>
+                <p class="text-muted">Qidiruv shartlarini o'zgartirib qayta urinib ko'ring.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        {% if cars.has_other_pages %}
+        <div class="row mt-5">
+            <div class="col text-center">
+                <div class="block-27">
+                    <ul>
+                        {% if cars.has_previous %}
+                        <li><a href="?page={{ cars.previous_page_number }}{% if selected_brand %}&brand={{ selected_brand }}{% endif %}{% if search %}&search={{ search }}{% endif %}"><i class="fas fa-chevron-left"></i></a></li>
+                        {% endif %}
+                        
+                        {% for num in cars.paginator.page_range %}
+                            {% if cars.number == num %}
+                            <li class="active"><span>{{ num }}</span></li>
+                            {% elif num > cars.number|add:'-3' and num < cars.number|add:'3' %}
+                            <li><a href="?page={{ num }}{% if selected_brand %}&brand={{ selected_brand }}{% endif %}{% if search %}&search={{ search }}{% endif %}">{{ num }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if cars.has_next %}
+                        <li><a href="?page={{ cars.next_page_number }}{% if selected_brand %}&brand={{ selected_brand }}{% endif %}{% if search %}&search={{ search }}{% endif %}"><i class="fas fa-chevron-right"></i></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="ftco-section ftco-intro" style="background-image: url('{% static 'images/bg_2.jpg' %}');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h2 class="mb-4 text-white">Sizga mos avtomobilni topa olmadingizmi?</h2>
+                <p class="text-white mb-4">
+                    Biz bilan bog'laning, biz sizning ehtiyojlaringizga mos keladigan 
+                    boshqa variantlarni taklif qilamiz yoki kelajakdagi yangi keluvchi 
+                    avtomobillar haqida ma'lumot beramiz.
+                </p>
+                <a href="{% url 'home' %}#aloqa" class="btn btn-warning btn-lg">
+                    <i class="fas fa-phone-alt mr-2"></i> Konsultatsiya olish
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .car-wrap {
+        border: 1px solid #e9ecef;
+        transition: all 0.3s ease;
+        overflow: hidden;
+        background: white;
+    }
+    
+    .car-wrap:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .car-wrap .img {
+        height: 220px;
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .car-wrap .text {
+        padding: 20px;
+    }
+    
+    .car-wrap .cat {
+        background: #f8f9fa;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #6c757d;
+    }
+    
+    .car-wrap .price {
+        font-size: 20px;
+        font-weight: 600;
+        color: #ff5722;
+    }
+    
+    .car-wrap .price span {
+        font-size: 14px;
+        font-weight: 400;
+        color: #6c757d;
+    }
+    
+    .car-info {
+        font-size: 14px;
+        color: #6c757d;
+        border-top: 1px solid #e9ecef;
+        border-bottom: 1px solid #e9ecef;
+        padding: 10px 0;
+    }
+    
+    .block-27 ul {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .block-27 ul li {
+        display: inline-block;
+        margin: 0 2px;
+    }
+    
+    .block-27 ul li a,
+    .block-27 ul li span {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        border-radius: 50%;
+        background: #f8f9fa;
+        color: #333;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .block-27 ul li.active span {
+        background: #ff5722;
+        color: white;
+    }
+    
+    .block-27 ul li a:hover {
+        background: #e9ecef;
+    }
+</style>
+{% endblock %}

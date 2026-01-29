@@ -1,0 +1,311 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}RentCar - {{ car.name }}{% endblock %}
+
+{% block content %}
+<section class="hero-wrap hero-wrap-2" style="background-image: url('{% static 'images/bg_3.jpg' %}');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-start">
+            <div class="col-md-9 pb-5">
+                <p class="breadcrumbs">
+                    <span class="mr-2">
+                        <a href="{% url 'home' %}">
+                            <i class="fas fa-home"></i> Bosh sahifa <i class="ion-ios-arrow-forward"></i>
+                        </a>
+                    </span>
+                    <span>
+                        <a href="{% url 'car_list' %}">Avtomobillar <i class="ion-ios-arrow-forward"></i></a>
+                    </span>
+                    <span>{{ car.name }}</span>
+                </p>
+                <h1 class="mb-3 bread text-white">{{ car.name }}</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-car-details">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="car-details">
+                    <div class="img rounded" style="background-image: url('{{ car.image.url }}'); height: 400px; background-size: cover; background-position: center;"></div>
+                    <div class="text text-center mt-4">
+                        <span class="subheading">{{ car.brand.name }}</span>
+                        <h2>{{ car.name }}</h2>
+                        <h3 class="text-primary">{{ car.price_per_day }} $ / kun</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-md d-flex align-self-stretch">
+                <div class="media block-6 services">
+                    <div class="media-body py-md-4">
+                        <div class="d-flex mb-3 align-items-center">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <i class="fas fa-tachometer-alt fa-2x text-primary"></i>
+                            </div>
+                            <div class="text ml-3">
+                                <h3 class="heading mb-0">
+                                    Yurgan masofa
+                                    <span>{{ car.mileage }} km</span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex align-self-stretch">
+                <div class="media block-6 services">
+                    <div class="media-body py-md-4">
+                        <div class="d-flex mb-3 align-items-center">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <i class="fas fa-cogs fa-2x text-primary"></i>
+                            </div>
+                            <div class="text ml-3">
+                                <h3 class="heading mb-0">
+                                    Uzatmalar qutisi
+                                    <span>{{ car.get_transmission_display }}</span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex align-self-stretch">
+                <div class="media block-6 services">
+                    <div class="media-body py-md-4">
+                        <div class="d-flex mb-3 align-items-center">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <i class="fas fa-users fa-2x text-primary"></i>
+                            </div>
+                            <div class="text ml-3">
+                                <h3 class="heading mb-0">
+                                    O'rindiqlar
+                                    <span>{{ car.seats }} kishi</span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex align-self-stretch">
+                <div class="media block-6 services">
+                    <div class="media-body py-md-4">
+                        <div class="d-flex mb-3 align-items-center">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <i class="fas fa-gas-pump fa-2x text-primary"></i>
+                            </div>
+                            <div class="text ml-3">
+                                <h3 class="heading mb-0">
+                                    Yoqilg'i
+                                    <span>{{ car.get_fuel_type_display }}</span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md d-flex align-self-stretch">
+                <div class="media block-6 services">
+                    <div class="media-body py-md-4">
+                        <div class="d-flex mb-3 align-items-center">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <i class="fas fa-palette fa-2x text-primary"></i>
+                            </div>
+                            <div class="text ml-3">
+                                <h3 class="heading mb-0">
+                                    Rang
+                                    <span>{{ car.color }}</span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-md-8">
+                <div class="bd-example bd-example-tabs">
+                    <div class="d-flex justify-content-center">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab">
+                                    Tavsif
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-specs-tab" data-toggle="pill" href="#pills-specs" role="tab">
+                                    Texnik xususiyatlar
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-description" role="tabpanel">
+                            <p>{{ car.description|default:"Bu avtomobil yuqori sifatli va qulay. Barcha zamonaviy qulayliklar bilan jihozlangan." }}</p>
+                            <p>Avtomobilimiz toza va yaxshi holatda. Barcha kerakli hujjatlar mavjud. Ijaraga olish uchun ariza yuborishingiz mumkin.</p>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="pills-specs" role="tabpanel">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Brend</th>
+                                    <td>{{ car.brand.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Model</th>
+                                    <td>{{ car.name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Yil</th>
+                                    <td>{{ car.year }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Yurgan masofa</th>
+                                    <td>{{ car.mileage }} km</td>
+                                </tr>
+                                <tr>
+                                    <th>Yoqilg'i turi</th>
+                                    <td>{{ car.get_fuel_type_display }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Uzatmalar qutisi</th>
+                                    <td>{{ car.get_transmission_display }}</td>
+                                </tr>
+                                <tr>
+                                    <th>O'rindiqlar soni</th>
+                                    <td>{{ car.seats }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Rang</th>
+                                    <td>{{ car.color }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Kunlik narx</th>
+                                    <td><strong>{{ car.price_per_day }} $</strong></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0"><i class="fas fa-calendar-check mr-2"></i>Ijara uchun ariza</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>{{ form.full_name.label }}</label>
+                                {{ form.full_name }}
+                                {% if form.full_name.errors %}
+                                    <small class="text-danger">{{ form.full_name.errors }}</small>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>{{ form.phone.label }}</label>
+                                {{ form.phone }}
+                                {% if form.phone.errors %}
+                                    <small class="text-danger">{{ form.phone.errors }}</small>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>{{ form.email.label }}</label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
+                                    <small class="text-danger">{{ form.email.errors }}</small>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>{{ form.start_date.label }}</label>
+                                {{ form.start_date }}
+                                {% if form.start_date.errors %}
+                                    <small class="text-danger">{{ form.start_date.errors }}</small>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>{{ form.end_date.label }}</label>
+                                {{ form.end_date }}
+                                {% if form.end_date.errors %}
+                                    <small class="text-danger">{{ form.end_date.errors }}</small>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>{{ form.message.label }}</label>
+                                {{ form.message }}
+                                {% if form.message.errors %}
+                                    <small class="text-danger">{{ form.message.errors }}</small>
+                                {% endif %}
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">
+                                <i class="fas fa-paper-plane mr-2"></i>Ariza yuborish
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-no-pt">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 heading-section text-center mb-5">
+                <span class="subheading">O'xshash avtomobillar</span>
+                <h2 class="mb-2">Boshqa avtomobillar</h2>
+            </div>
+        </div>
+        <div class="row">
+            {% for related_car in related_cars %}
+            <div class="col-md-4 mb-4">
+                <div class="car-wrap rounded">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url('{{ related_car.image.url }}'); height: 200px; background-size: cover;"></div>
+                    <div class="text p-3">
+                        <h2 class="mb-0"><a href="{% url 'car_detail' related_car.id %}">{{ related_car.name }}</a></h2>
+                        <div class="d-flex mb-3">
+                            <span class="cat">{{ related_car.brand.name }}</span>
+                            <p class="price ml-auto">{{ related_car.price_per_day }} $ <span>/kun</span></p>
+                        </div>
+                        <p class="d-flex mb-0 d-block">
+                            <a href="{% url 'car_detail' related_car.id %}" class="btn btn-primary py-2 mr-1">Batafsil</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>O'xshash avtomobillar topilmadi.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}RentCar - Biz haqimizda{% endblock %}
+
+{% block content %}
+    <!-- Sahifa sarlavhasi -->
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('{% static 'images/bg_2.jpg' %}');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-start">
+            <div class="col-md-9 pb-5">
+                <p class="breadcrumbs">
+                    <span class="mr-2">
+                        <a href="{% url 'home' %}" class="text-white">
+                            <i class="fas fa-home"></i> Bosh sahifa <i class="ion-ios-arrow-forward"></i>
+                        </a>
+                    </span>
+                    <span class="text-white">Biz haqimizda</span>
+                </p>
+                <h1 class="mb-3 bread text-white">Biz haqimizda</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Tarix -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4">
+                    <img src="{% static 'images/about.jpg' %}" alt="RentCar tarixi" class="img-fluid rounded shadow" onerror="this.src='{% static 'images/bg_1.jpg' %}'">
+                </div>
+                <div class="col-md-6 mb-4">
+                    <h2 class="mb-4">RentCar tarixi</h2>
+                    <p class="lead">
+                        2015 yildan beri O'zbekiston bozorida ishlab kelayotgan RentCar 
+                        avtomobil ijara xizmatlari sifatli va ishonchli xizmatlarni 
+                        taklif etadi.
+                    </p>
+                    <p>
+                        Bizning maqsadimiz - har bir mijozga uning ehtiyojlariga mos 
+                        avtomobilni taklif qilish va ijara jarayonida barcha qulayliklarni 
+                        taqdim etishdir.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Misyon va vazifalar -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="mission-card p-4 h-100">
+                        <div class="icon-wrapper mb-3">
+                            <i class="fas fa-bullseye fa-3x text-primary"></i>
+                        </div>
+                        <h3>Bizning misyonimiz</h3>
+                        <p>
+                            O'zbekiston avtomobil bozorida sifat standartlarini oshirish, 
+                            mijozlarimizga eng yaxshi xizmatni ko'rsatish va ularning 
+            ishonchini qozonish.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="vision-card p-4 h-100">
+                        <div class="icon-wrapper mb-3">
+                            <i class="fas fa-eye fa-3x text-success"></i>
+                        </div>
+                        <h3>Bizning ko'rinishimiz</h3>
+                        <p>
+                            Mintaqadagi eng ishonchli va yetakchi avtosalon bo'lish, 
+            har bir avtomobilsevarga uning orzularini amalga oshirishda 
+            yordam berish.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Qadriyatlar -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-title">Bizning qadriyatlarimiz</h2>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="value-card text-center p-4">
+                        <i class="fas fa-handshake fa-3x text-primary mb-3"></i>
+                        <h5>Ishonch</h5>
+                        <p class="text-muted">
+                            Har bir mijoz bilan ochiq va halol munosabatlar o'rnatamiz
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="value-card text-center p-4">
+                        <i class="fas fa-medal fa-3x text-warning mb-3"></i>
+                        <h5>Sifat</h5>
+                        <p class="text-muted">
+                            Avtomobil tanlashdan tortib, xizmat ko'rsatishgacha yuqori sifat
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="value-card text-center p-4">
+                        <i class="fas fa-users fa-3x text-success mb-3"></i>
+                        <h5>Mijozlar diqqat markazida</h5>
+                        <p class="text-muted">
+                            Har bir mijozning ehtiyoji va istaklarini e'tiborga olamiz
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jamoa -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-title">Bizning mutaxassislar</h2>
+                    <p class="text-muted">Sizga yordam berishga tayyor professional jamoa</p>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="team-card text-center">
+                        <img src="{% static 'images/person_1.jpg' %}" class="rounded-circle mb-3" width="150" height="150" alt="Jamoa a'zosi" style="object-fit: cover;">
+                        <h5>Aziz Abdurahmonov</h5>
+                        <p class="text-muted">Bosh menejer</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <div class="team-card text-center">
+                        <img src="{% static 'images/person_2.jpg' %}" class="rounded-circle mb-3" width="150" height="150" alt="Jamoa a'zosi" style="object-fit: cover;">
+                        <h5>Dilnoza Rasulova</h5>
+                        <p class="text-muted">Mijozlar xizmati menejeri</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <div class="team-card text-center">
+                        <img src="{% static 'images/person_3.jpg' %}" class="rounded-circle mb-3" width="150" height="150" alt="Jamoa a'zosi" style="object-fit: cover;">
+                        <h5>Sherzod Qodirov</h5>
+                        <p class="text-muted">Texnik mutaxassis</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-3 mb-4">
+                    <div class="team-card text-center">
+                        <img src="{% static 'images/person_4.jpg' %}" class="rounded-circle mb-3" width="150" height="150" alt="Jamoa a'zosi" style="object-fit: cover;">
+                        <h5>Zarina Yunusova</h5>
+                        <p class="text-muted">Kredit bo'limi menejeri</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3 class="mb-3">RentCar bilan hamkorlik qilishni xohlaysizmi?</h3>
+                    <p class="mb-0">Biz bilan bog'laning va eng yaxshi takliflarni oling</p>
+                </div>
+                <div class="col-md-4 text-right">
+                    <a href="{% url 'contact' %}" class="btn btn-light btn-lg">
+                        <i class="fas fa-envelope mr-2"></i> Xabar yuborish
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

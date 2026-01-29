@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}RentCar - Xizmatlar{% endblock %}
+
+{% block content %}
+<section class="hero-wrap hero-wrap-2" style="background-image: url('{% static 'images/bg_2.jpg' %}');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-start">
+            <div class="col-md-9 pb-5">
+                <p class="breadcrumbs">
+                    <span class="mr-2">
+                        <a href="{% url 'home' %}">
+                            <i class="fas fa-home"></i> Bosh sahifa <i class="ion-ios-arrow-forward"></i>
+                        </a>
+                    </span>
+                    <span>Xizmatlar</span>
+                </p>
+                <h1 class="mb-3 bread text-white">Bizning Xizmatlarimiz</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-7 text-center">
+                <span class="subheading">Xizmatlar</span>
+                <h2 class="mb-3">Bizning Xizmatlarimiz</h2>
+                <p>Biz sizga eng yaxshi va qulay xizmatlarni taklif qilamiz</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="services services-2 w-100 text-center p-4 shadow-sm rounded">
+                    <div class="icon d-flex align-items-center justify-content-center mb-3">
+                        <i class="fas fa-car fa-3x text-primary"></i>
+                    </div>
+                    <div class="text w-100">
+                        <h3 class="heading mb-2">Avtomobil Ijarasi</h3>
+                        <p>Kunlik, haftalik va oylik ijara xizmatlari. Barcha turdagi avtomobillar mavjud.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="services services-2 w-100 text-center p-4 shadow-sm rounded">
+                    <div class="icon d-flex align-items-center justify-content-center mb-3">
+                        <i class="fas fa-plane fa-3x text-primary"></i>
+                    </div>
+                    <div class="text w-100">
+                        <h3 class="heading mb-2">Aeroport Transfer</h3>
+                        <p>Aeroportdan va aeroportga qulay transfer xizmati. Vaqtingizni tejang.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="services services-2 w-100 text-center p-4 shadow-sm rounded">
+                    <div class="icon d-flex align-items-center justify-content-center mb-3">
+                        <i class="fas fa-city fa-3x text-primary"></i>
+                    </div>
+                    <div class="text w-100">
+                        <h3 class="heading mb-2">Shahar Ichida Transfer</h3>
+                        <p>Shahar ichida istalgan joyga qulay va xavfsiz transfer xizmati.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="services services-2 w-100 text-center p-4 shadow-sm rounded">
+                    <div class="icon d-flex align-items-center justify-content-center mb-3">
+                        <i class="fas fa-route fa-3x text-primary"></i>
+                    </div>
+                    <div class="text w-100">
+                        <h3 class="heading mb-2">Shahar Tashqarisi</h3>
+                        <p>Uzoq masofali safarlar uchun maxsus xizmatlar va qulay shartlar.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="services services-2 w-100 text-center p-4 shadow-sm rounded">
+                    <div class="icon d-flex align-items-center justify-content-center mb-3">
+                        <i class="fas fa-tools fa-3x text-primary"></i>
+                    </div>
+                    <div class="text w-100">
+                        <h3 class="heading mb-2">Texnik Xizmat</h3>
+                        <p>Avtomobillarni doimiy texnik xolatda saqlash va ta'mirlash xizmatlari.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="services services-2 w-100 text-center p-4 shadow-sm rounded">
+                    <div class="icon d-flex align-items-center justify-content-center mb-3">
+                        <i class="fas fa-shield-alt fa-3x text-primary"></i>
+                    </div>
+                    <div class="text w-100">
+                        <h3 class="heading mb-2">Sug'urta</h3>
+                        <p>To'liq sug'urta xizmatlari va xavfsizlik kafolatlari.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="services services-2 w-100 text-center p-4 shadow-sm rounded">
+                    <div class="icon d-flex align-items-center justify-content-center mb-3">
+                        <i class="fas fa-credit-card fa-3x text-primary"></i>
+                    </div>
+                    <div class="text w-100">
+                        <h3 class="heading mb-2">To'lov Imkoniyatlari</h3>
+                        <p>Naqd, karta va onlayn to'lov imkoniyatlari. Qulay shartlar.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="services services-2 w-100 text-center p-4 shadow-sm rounded">
+                    <div class="icon d-flex align-items-center justify-content-center mb-3">
+                        <i class="fas fa-headset fa-3x text-primary"></i>
+                    </div>
+                    <div class="text w-100">
+                        <h3 class="heading mb-2">24/7 Qo'llab-quvvatlash</h3>
+                        <p>Kun bo'yi mijozlar xizmati. Har qanday savolga javob oling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-intro" style="background-image: url('{% static 'images/bg_3.jpg' %}');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <h2 class="mb-4 text-white">Bizning xizmatlarimizdan foydalanmoqchimisiz?</h2>
+                <p class="text-white mb-4">
+                    Biz bilan bog'laning va eng yaxshi takliflarni oling. Mutaxassislarimiz sizga yordam berishga tayyor.
+                </p>
+                <a href="{% url 'contact' %}" class="btn btn-warning btn-lg">
+                    <i class="fas fa-phone-alt mr-2"></i> Hoziroq bog'lanish
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

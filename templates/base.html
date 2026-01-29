@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RentCar - Avtomobil Ijara Xizmatlari{% endblock %}</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    {% load static %}
+    
+    <!-- CSS fayllar -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    {% block extra_css %}{% endblock %}
+    
+    <style>
+        :root {
+            --primary-color: #ff5722;
+            --secondary-color: #2196f3;
+            --dark-color: #212121;
+            --light-color: #f8f9fa;
+            --success-color: #4caf50;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Yuqori navigatsiya -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <i class="fas fa-car"></i> <strong>Rent</strong><span class="text-warning">Car</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item {% if request.path == '/' %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'home' %}">
+                            <i class="fas fa-home"></i> Bosh sahifa
+                        </a>
+                    </li>
+                    <li class="nav-item {% if 'avtomobillar' in request.path %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'car_list' %}">
+                            <i class="fas fa-car-side"></i> Avtomobillar
+                        </a>
+                    </li>
+                    <li class="nav-item {% if 'yangi' in request.path %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'new_cars' %}">
+                            <i class="fas fa-plus-circle"></i> Yangilar
+                        </a>
+                    </li>
+                    <li class="nav-item {% if 'ishlatilgan' in request.path %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'used_cars' %}">
+                            <i class="fas fa-redo"></i> Ishlatilganlar
+                        </a>
+                    </li>
+                    <li class="nav-item {% if 'xizmatlar' in request.path %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'services' %}">
+                            <i class="fas fa-cogs"></i> Xizmatlar
+                        </a>
+                    </li>
+                    <li class="nav-item {% if 'narxlar' in request.path %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'pricing' %}">
+                            <i class="fas fa-tags"></i> Narxlar
+                        </a>
+                    </li>
+                    <li class="nav-item {% if 'biz-haqimizda' in request.path %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'about' %}">
+                            <i class="fas fa-info-circle"></i> Biz haqimizda
+                        </a>
+                    </li>
+                    <li class="nav-item {% if 'aloqa' in request.path %}active{% endif %}">
+                        <a class="nav-link" href="{% url 'contact' %}">
+                            <i class="fas fa-phone-alt"></i> Aloqa
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="ml-3">
+                    <a href="tel:+998901234567" class="btn btn-warning btn-sm">
+                        <i class="fas fa-phone"></i> +998 90 123 45 67
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Kontent blok -->
+    {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="mb-4">
+                        <i class="fas fa-car"></i> Rent<span class="text-warning">Car</span>
+                    </h4>
+                    <p class="text-light">
+                        RentCar - O'zbekistondagi yetakchi avtomobil ijara xizmatlari. Yangi va sifatli avtomobillarni eng yaxshi narxlarda taklif qilamiz.
+                    </p>
+                    <div class="social-icons mt-4">
+                        <a href="#" class="text-white mr-3"><i class="fab fa-telegram fa-2x"></i></a>
+                        <a href="#" class="text-white mr-3"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-white mr-3"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-2x"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-4">Tezkor havolalar</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'home' %}" class="text-light">Bosh sahifa</a></li>
+                        <li><a href="{% url 'car_list' %}" class="text-light">Avtomobillar</a></li>
+                        <li><a href="{% url 'new_cars' %}" class="text-light">Yangilar</a></li>
+                        <li><a href="{% url 'used_cars' %}" class="text-light">Ishlatilganlar</a></li>
+                        <li><a href="{% url 'services' %}" class="text-light">Xizmatlar</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-4">Aloqa ma'lumotlari</h5>
+                    <p class="text-light">
+                        <i class="fas fa-map-marker-alt mr-2"></i> Toshkent shahri, Yunusobod tumani
+                    </p>
+                    <p class="text-light">
+                        <i class="fas fa-phone mr-2"></i> +998 90 123 45 67
+                    </p>
+                    <p class="text-light">
+                        <i class="fas fa-envelope mr-2"></i> info@marsauto.uz
+                    </p>
+                    <p class="text-light">
+                        <i class="fas fa-clock mr-2"></i> Ish vaqti: 9:00 - 19:00
+                    </p>
+                </div>
+            </div>
+            
+            <hr class="bg-light mt-4">
+            
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <p class="mb-0">
+                        &copy; 2024 RentCar. Barcha huquqlar himoyalangan.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript fayllar -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

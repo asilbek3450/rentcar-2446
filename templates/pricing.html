@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}RentCar - Narxlar{% endblock %}
+
+{% block content %}
+<section class="hero-wrap hero-wrap-2" style="background-image: url('{% static 'images/bg_1.jpg' %}');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-start">
+            <div class="col-md-9 pb-5">
+                <p class="breadcrumbs">
+                    <span class="mr-2">
+                        <a href="{% url 'home' %}">
+                            <i class="fas fa-home"></i> Bosh sahifa <i class="ion-ios-arrow-forward"></i>
+                        </a>
+                    </span>
+                    <span>Narxlar</span>
+                </p>
+                <h1 class="mb-3 bread text-white">Narxlar</h1>
+                <p class="text-light">Eng yaxshi narxlarda avtomobil ijara xizmatlari</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-cart">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-7 text-center">
+                <span class="subheading">Narxlar</span>
+                <h2 class="mb-3">Avtomobil Ijara Narxlari</h2>
+                <p>Barcha avtomobillarimiz uchun qulay va shaffof narxlar</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="car-list">
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-primary">
+                            <tr class="text-center">
+                                <th>Rasm</th>
+                                <th>Avtomobil</th>
+                                <th class="bg-primary text-white">Kunlik narx</th>
+                                <th class="bg-dark text-white">Haftalik narx</th>
+                                <th class="bg-secondary text-white">Oylik narx</th>
+                                <th>Harakat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for car in cars %}
+                            <tr>
+                                <td class="car-image">
+                                    <div class="img" style="background-image:url('{{ car.image.url }}'); width: 100px; height: 70px; background-size: cover; background-position: center;"></div>
+                                </td>
+                                <td class="product-name">
+                                    <h5>{{ car.brand.name }} {{ car.name }}</h5>
+                                    <p class="mb-0 text-muted">
+                                        <i class="fas fa-calendar mr-1"></i> {{ car.year }} yil |
+                                        <i class="fas fa-tachometer-alt mr-1"></i> {{ car.mileage|floatformat:0 }} km |
+                                        <i class="fas fa-gas-pump mr-1"></i> {{ car.get_fuel_type_display }}
+                                    </p>
+                                </td>
+                                <td class="price text-center">
+                                    <h4 class="text-primary">{{ car.price_per_day }} $</h4>
+                                    <span class="text-muted">/ kun</span>
+                                </td>
+                                <td class="price text-center">
+                                    {% widthratio car.price_per_day 1 7 as base_weekly %}
+                                    {% widthratio base_weekly 100 90 as weekly_price %}
+                                    <h4 class="text-dark">{{ weekly_price }} $</h4>
+                                    <span class="text-muted">/ hafta</span>
+                                    <small class="d-block text-success">-10% chegirma</small>
+                                </td>
+                                <td class="price text-center">
+                                    {% widthratio car.price_per_day 1 30 as base_monthly %}
+                                    {% widthratio base_monthly 100 85 as monthly_price %}
+                                    <h4 class="text-secondary">{{ monthly_price }} $</h4>
+                                    <span class="text-muted">/ oy</span>
+                                    <small class="d-block text-success">-15% chegirma</small>
+                                </td>
+                                <td class="text-center">
+                                    <a href="{% url 'car_detail' car.id %}" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-info-circle"></i> Batafsil
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center py-5">
+                                    <i class="fas fa-car fa-3x text-muted mb-3"></i>
+                                    <p>Avtomobillar topilmadi</p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div class="alert alert-info">
+                    <h5><i class="fas fa-info-circle mr-2"></i>Eslatma:</h5>
+                    <ul class="mb-0">
+                        <li>Haftalik ijara uchun 10% chegirma qo'llaniladi</li>
+                        <li>Oylik ijara uchun 15% chegirma qo'llaniladi</li>
+                        <li>Barcha narxlar dollar ($) da ko'rsatilgan</li>
+                        <li>Qo'shimcha xizmatlar uchun alohida narxlar qo'llaniladi</li>
+                        <li>Batafsil ma'lumot uchun biz bilan bog'laning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}RentCar - Yangi Avtomobillar{% endblock %}
+
+{% block content %}
+<section class="hero-wrap hero-wrap-2" style="background-image: url('{% static 'images/bg_1.jpg' %}');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end justify-content-start">
+            <div class="col-md-9 pb-5">
+                <p class="breadcrumbs">
+                    <span class="mr-2">
+                        <a href="{% url 'home' %}">
+                            <i class="fas fa-home"></i> Bosh sahifa <i class="ion-ios-arrow-forward"></i>
+                        </a>
+                    </span>
+                    <span>Yangi avtomobillar</span>
+                </p>
+                <h1 class="mb-3 bread text-white">Yangi Avtomobillar</h1>
+                <p class="text-light">Eng yangi va zamonaviy avtomobillar</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-filter mr-2"></i>Qidirish va filtrlash</h5>
+                        <form method="get" action="{% url 'new_cars' %}" class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label">Brend</label>
+                                <select class="form-control" name="brand">
+                                    <option value="">Barcha brendlar</option>
+                                    {% for brand in brands %}
+                                    <option value="{{ brand.id }}" {% if selected_brand == brand.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ brand.name }}
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Qidirish</label>
+                                <input type="text" class="form-control" name="search" value="{{ search }}" placeholder="Model nomi">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Min narx ($)</label>
+                                <input type="number" class="form-control" name="min_price" value="{{ min_price }}" placeholder="0">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Max narx ($)</label>
+                                <input type="number" class="form-control" name="max_price" value="{{ max_price }}" placeholder="1000">
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-search"></i> Qidirish
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            {% for car in cars %}
+            <div class="col-md-4 mb-4">
+                <div class="car-wrap rounded">
+                    <div class="img rounded d-flex align-items-end" style="background-image: url('{{ car.image.url }}'); height: 220px; background-size: cover;">
+                        <span class="badge bg-success position-absolute" style="top: 10px; right: 10px;">Yangi</span>
+                    </div>
+                    <div class="text p-3">
+                        <h2 class="mb-0"><a href="{% url 'car_detail' car.id %}">{{ car.brand.name }} {{ car.name }}</a></h2>
+                        <div class="d-flex mb-3">
+                            <span class="cat">{{ car.brand.name }}</span>
+                            <p class="price ml-auto">{{ car.price_per_day }} $ <span>/kun</span></p>
+                        </div>
+                        <div class="car-info mb-3">
+                            <p class="mb-1">
+                                <i class="fas fa-calendar mr-2"></i> {{ car.year }} yil
+                                <span class="ml-3"><i class="fas fa-tachometer-alt mr-2"></i> {{ car.mileage|floatformat:0 }} km</span>
+                            </p>
+                            <p class="mb-1">
+                                <i class="fas fa-gas-pump mr-2"></i> {{ car.get_fuel_type_display }}
+                                <span class="ml-3"><i class="fas fa-cogs mr-2"></i> {{ car.get_transmission_display }}</span>
+                            </p>
+                        </div>
+                        <p class="d-flex mb-0 d-block">
+                            <a href="{% url 'car_detail' car.id %}" class="btn btn-primary py-2 w-100">
+                                <i class="fas fa-info-circle mr-1"></i> Batafsil
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center py-5">
+                <i class="fas fa-car fa-5x text-muted mb-3"></i>
+                <h3>Yangi avtomobillar topilmadi</h3>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if cars.has_other_pages %}
+        <div class="row mt-5">
+            <div class="col text-center">
+                <div class="block-27">
+                    <ul>
+                        {% if cars.has_previous %}
+                        <li><a href="?page={{ cars.previous_page_number }}{% if selected_brand %}&brand={{ selected_brand }}{% endif %}"><i class="fas fa-chevron-left"></i></a></li>
+                        {% endif %}
+                        {% for num in cars.paginator.page_range %}
+                            {% if cars.number == num %}
+                            <li class="active"><span>{{ num }}</span></li>
+                            {% elif num > cars.number|add:'-3' and num < cars.number|add:'3' %}
+                            <li><a href="?page={{ num }}{% if selected_brand %}&brand={{ selected_brand }}{% endif %}">{{ num }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if cars.has_next %}
+                        <li><a href="?page={{ cars.next_page_number }}{% if selected_brand %}&brand={{ selected_brand }}{% endif %}"><i class="fas fa-chevron-right"></i></a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
